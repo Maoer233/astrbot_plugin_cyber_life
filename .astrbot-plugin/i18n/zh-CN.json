@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "display_name": "赛博日常",
+    "description": "内置浏览器、扫码登录、自动刷帖评论、视频声音转字幕、ComfyUI 画画与动态心情卡"
+  },
+  "views": {
+    "settings": {
+      "title": "赛博日常控制台",
+      "description": "管理账号、扫码登录、使用时间、峰谷频率、心情卡与最近动态。"
+    }
+  }
+}

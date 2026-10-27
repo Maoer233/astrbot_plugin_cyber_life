@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.test-tmp/
+.pytest_cache/
+.mypy_cache/
+*.zip
+
+# Installed from requirements.txt by AstrBot; not needed in the Git repo.
+vendor/
+
+# Never commit local AstrBot runtime config or account state.
+data/cmd_config.json
+data/plugin_data/
+sessions/
+accounts.json
+settings.json
+mood.json
+activity.json
+media/
+models/

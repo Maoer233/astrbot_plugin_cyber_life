@@ -1,0 +1,280 @@
+{
+  "enabled": {
+    "description": "启用赛博日常",
+    "type": "bool",
+    "default": true
+  },
+  "auto_run": {
+    "description": "自动活动（到时间自己刷帖、评论、画画）",
+    "type": "bool",
+    "default": true,
+    "hint": "关闭后仍然可以用 /life run 手动开始"
+  },
+  "agent_autonomy": {
+    "description": "自主提示词：给主聊天模型注入操作授权提示",
+    "type": "bool",
+    "default": false,
+    "hint": "关闭后不注入任何操作提示，避免普通聊天被引导去刷帖；bot 仍可通过工具调用和 /life 命令操作"
+  },
+  "chat_auto_trigger": {
+    "description": "聊天自动触发：关键词/意图分类器直接接管消息",
+    "type": "bool",
+    "default": false,
+    "hint": "默认关闭。关闭后普通聊天不会被接管，但明确说“去贴吧/小黑盒刷一会儿”仍会执行；开启后连模糊说法也会被分类器接管，容易误触"
+  },
+  "auto_login": {
+    "description": "需要账号时自动发二维码",
+    "type": "bool",
+    "default": true,
+    "hint": "用户说想去玩但还没登录时，bot 直接发二维码；扫完自动继续原来的计划"
+  },
+  "agent_manage_usage": {
+    "description": "Bot 可自行调整使用时间",
+    "type": "bool",
+    "default": true,
+    "hint": "允许 bot 修改每日刷帖上限、单次活动时长和访问模式；关闭后这些只能由你在设置页修改"
+  },
+  "admin_only": {
+    "description": "只允许 AstrBot 管理员使用",
+    "type": "bool",
+    "default": true,
+    "hint": "填写 allow_qq 后此限制失效"
+  },
+  "allow_qq": {
+    "description": "允许使用的 QQ 号白名单（逗号分隔或列表）",
+    "type": "list",
+    "default": []
+  },
+  "notify_umo": {
+    "description": "通知会话（unified_msg_origin，留空则使用最后一次私聊/群聊）",
+    "type": "string",
+    "default": ""
+  },
+  "access_mode": {
+    "description": "自动峰谷访问模式",
+    "type": "string",
+    "default": "all_day",
+    "options": ["valley_only", "all_day"],
+    "labels": ["仅谷时可用", "全天开放"],
+    "subtitles": ["峰时不响应游玩/画画/看视频", "任何时间可用，峰时按频率放慢"]
+  },
+  "peak_frequency_percent": {
+    "description": "峰时使用频率（仅全天开放模式生效）",
+    "type": "int",
+    "default": 40,
+    "slider": {"min": 5, "max": 100, "step": 5},
+    "hint": "40 表示峰时的活动间隔约为谷时的 2.5 倍"
+  },
+  "holiday_enabled": {
+    "description": "自动识别中国法定节假日与调休",
+    "type": "bool",
+    "default": true,
+    "hint": "节假日自动视为全天开放；调休上班日视为工作日"
+  },
+  "extra_holiday_dates": {
+    "description": "额外休息日（YYYY-MM-DD，多个）",
+    "type": "list",
+    "default": [],
+    "hint": "公司/学校额外假期，留空即可"
+  },
+  "extra_workday_dates": {
+    "description": "额外调休上班日（YYYY-MM-DD，多个）",
+    "type": "list",
+    "default": [],
+    "hint": "法定节假日之外需要上班的日期"
+  },
+  "daily_watch_minutes": {
+    "description": "每天刷帖时间上限（分钟）",
+    "type": "int",
+    "default": 60,
+    "slider": {"min": 0, "max": 240, "step": 5}
+  },
+  "comment_interval_min": {
+    "description": "评论最小间隔（分钟）",
+    "type": "int",
+    "default": 35,
+    "slider": {"min": 5, "max": 240, "step": 5}
+  },
+  "comment_interval_max": {
+    "description": "评论最大间隔（分钟）",
+    "type": "int",
+    "default": 90,
+    "slider": {"min": 10, "max": 480, "step": 5}
+  },
+  "max_comments_per_day": {
+    "description": "每天最多评论几条",
+    "type": "int",
+    "default": 8,
+    "slider": {"min": 0, "max": 50, "step": 1}
+  },
+  "reply_interval_min": {
+    "description": "回复最小间隔（分钟）",
+    "type": "int",
+    "default": 30,
+    "slider": {"min": 5, "max": 240, "step": 5}
+  },
+  "reply_interval_max": {
+    "description": "回复最大间隔（分钟）",
+    "type": "int",
+    "default": 75,
+    "slider": {"min": 10, "max": 480, "step": 5}
+  },
+  "max_replies_per_day": {
+    "description": "每天最多回复几条",
+    "type": "int",
+    "default": 6,
+    "slider": {"min": 0, "max": 50, "step": 1}
+  },
+  "comment_probability": {
+    "description": "刷到视频后评论的概率",
+    "type": "float",
+    "default": 0.55,
+    "slider": {"min": 0, "max": 1, "step": 0.05}
+  },
+  "platforms": {
+    "description": "参与刷帖的平台",
+    "type": "list",
+    "default": ["bilibili", "xiaoheihe", "tieba"]
+  },
+  "video_min_frames": {
+    "description": "视频最少截图张数",
+    "type": "int",
+    "default": 10,
+    "slider": {"min": 4, "max": 20, "step": 1}
+  },
+  "video_max_frames": {
+    "description": "视频最多截图张数",
+    "type": "int",
+    "default": 20,
+    "slider": {"min": 10, "max": 40, "step": 1}
+  },
+  "vision_enabled": {
+    "description": "用视觉模型识别关键帧拼图",
+    "type": "bool",
+    "default": true,
+    "hint": "关闭后只根据标题/简介推断，不调用视觉模型"
+  },
+  "subtitle_enabled": {
+    "description": "听声音转字幕：让 bot 知道视频里说了什么",
+    "type": "bool",
+    "default": true,
+    "hint": "优先读取B站AI字幕；没有字幕时用本地 Whisper 听写。转写结果会参与视频理解、评论和后台记录"
+  },
+  "subtitle_model": {
+    "description": "本地 Whisper 模型大小",
+    "type": "string",
+    "default": "small",
+    "options": ["tiny", "base", "small", "medium", "large-v3"],
+    "labels": ["tiny（最快，准确率低）", "base（轻量）", "small（推荐，约460MB）", "medium（更准，较慢）", "large-v3（最准，很慢）"],
+    "hint": "默认 small，中文效果和速度比较平衡；只有B站没有字幕时才会用到"
+  },
+  "subtitle_language": {
+    "description": "语音识别语言",
+    "type": "string",
+    "default": "zh",
+    "options": ["auto", "zh", "en", "ja"],
+    "labels": ["自动检测", "中文", "英语", "日语"]
+  },
+  "subtitle_max_seconds": {
+    "description": "本地听写最多处理多少秒声音",
+    "type": "int",
+    "default": 300,
+    "slider": {"min": 30, "max": 900, "step": 30},
+    "hint": "超过部分不转写，避免几分钟的视频占用太久 CPU；B站自带字幕不受此限制"
+  },
+  "subtitle_hf_endpoint": {
+    "description": "语音模型下载镜像",
+    "type": "string",
+    "default": "https://hf-mirror.com",
+    "hint": "首次使用本地听写会下载模型；国内建议保留 hf-mirror.com，能直连 HuggingFace 可改为 https://huggingface.co"
+  },
+  "mood_enabled": {
+    "description": "启用动态心情",
+    "type": "bool",
+    "default": true
+  },
+  "comfyui_enabled": {
+    "description": "启用 ComfyUI 画画",
+    "type": "bool",
+    "default": true
+  },
+  "comfyui_url": {
+    "description": "ComfyUI 地址",
+    "type": "string",
+    "default": "http://127.0.0.1:8188"
+  },
+  "comfyui_workflow": {
+    "description": "ComfyUI API 工作流 JSON 路径（留空使用内置模板）",
+    "type": "string",
+    "default": ""
+  },
+  "comfyui_checkpoint": {
+    "description": "ComfyUI 模型文件名",
+    "type": "string",
+    "default": "v1-5-pruned-emaonly.safetensors"
+  },
+  "comfyui_width": {
+    "description": "出图宽度",
+    "type": "int",
+    "default": 512
+  },
+  "comfyui_height": {
+    "description": "出图高度",
+    "type": "int",
+    "default": 768
+  },
+  "comfyui_steps": {
+    "description": "采样步数",
+    "type": "int",
+    "default": 24
+  },
+  "max_draws_per_day": {
+    "description": "每天最多画几张",
+    "type": "int",
+    "default": 3,
+    "slider": {"min": 0, "max": 20, "step": 1}
+  },
+  "browser_enabled": {
+    "description": "启用内置浏览器",
+    "type": "bool",
+    "default": true
+  },
+  "browser_headless": {
+    "description": "浏览器无头模式",
+    "type": "bool",
+    "default": true,
+    "hint": "小黑盒/贴吧扫码时如果截不到二维码，可关闭无头模式"
+  },
+  "browser_channel": {
+    "description": "浏览器通道",
+    "type": "string",
+    "default": "msedge",
+    "options": ["msedge", "chrome", "chromium"]
+  },
+  "browser_executable": {
+    "description": "自定义浏览器路径（留空自动）",
+    "type": "string",
+    "default": ""
+  },
+  "notify_actions": {
+    "description": "把看视频/评论动态主动发到会话（默认关；bot 仍可在后台查看）",
+    "type": "bool",
+    "default": false
+  },
+  "notify_draw": {
+    "description": "画完把图发给我",
+    "type": "bool",
+    "default": true
+  },
+  "activity_private": {
+    "description": "活动记录仅内部可见：开启后刷了什么、评论了什么不交给聊天；关闭后 bot 能在聊天里查看和说明",
+    "type": "bool",
+    "default": false
+  },
+  "deepseek_balance_base_url": {
+    "description": "DeepSeek 余额接口地址",
+    "type": "string",
+    "default": "",
+    "hint": "留空自动使用当前 DeepSeek 提供商的 api_base；只读取余额，不保存或显示 API Key"
+  }
+}

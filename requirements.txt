@@ -1,0 +1,8 @@
+playwright>=1.44
+qrcode>=8.0
+imageio-ffmpeg>=0.5
+# Local speech-to-text fallback. Bilibili AI subtitles work without it, but
+# videos without a subtitle track need this to turn audio into text.
+faster-whisper>=1.2,<1.3
+# Normalise Whisper's occasional Traditional Chinese output to Simplified.
+zhconv>=1.4

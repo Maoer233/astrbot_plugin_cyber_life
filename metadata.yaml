@@ -1,0 +1,7 @@
+name: astrbot_plugin_cyber_life
+display_name: 赛博日常
+desc: 自主模式 + 内置浏览器 + 扫码登录 + 自动刷帖评论 + 视频声音转字幕 + 后台活动记录（聊天可见） + 自主使用时间 + DeepSeek 余额 + ComfyUI 画画 + 动态心情卡
+version: 1.3.1
+author: zqjiujih201015-del
+astrbot_version: ">=4.16"
+repo: "https://github.com/zqjiujih201015-del/astrbot_plugin_cyber_life"

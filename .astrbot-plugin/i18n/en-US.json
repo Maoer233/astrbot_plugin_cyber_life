@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "display_name": "Cyber Life",
+    "description": "Built-in browser, QR login, autonomous browsing/commenting, video speech-to-text, ComfyUI drawing and a living mood card"
+  },
+  "views": {
+    "settings": {
+      "title": "Cyber Life Console",
+      "description": "Accounts, QR login, active hours, peak/valley pacing, mood card and recent activity."
+    }
+  }
+}
