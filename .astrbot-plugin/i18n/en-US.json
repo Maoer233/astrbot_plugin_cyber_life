@@ -8,5 +8,11 @@
       "title": "Cyber Life Console",
       "description": "Accounts, QR login, active hours, peak/valley pacing, mood card and recent activity."
     }
+  },
+  "pages": {
+    "settings": {
+      "title": "Cyber Life Console",
+      "description": "Accounts, QR login, active hours, peak/valley pacing, mood card and recent activity."
+    }
   }
 }

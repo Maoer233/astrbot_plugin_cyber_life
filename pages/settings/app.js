@@ -1,4 +1,55 @@
-const bridge = window.AstrBotPluginView;
+// AstrBot 4.24.2 - 4.28 inject the bridge as `window.AstrBotPluginPage`.
+// AstrBot 4.29+ inject it as `window.AstrBotPluginView`, keeping the older
+// global as an alias. Accept whichever name the host provides so one bundle
+// works across the whole 4.24.2+ range, and fall back to same-origin HTTP when
+// neither global exists (for example if the page is opened outside Dashboard).
+const bridge = (() => {
+  const native = window.AstrBotPluginPage || window.AstrBotPluginView;
+  if (native) {
+    return native;
+  }
+  const base = "/api/plug/astrbot_plugin_cyber_life/";
+  const call = async (method, endpoint, payload) => {
+    const url = new URL(
+      `${base}${String(endpoint || "").replace(/^\/+/, "")}`,
+      window.location.origin,
+    );
+    const init = { method, credentials: "same-origin" };
+    if (method === "GET") {
+      Object.entries(payload || {}).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          url.searchParams.set(key, String(value));
+        }
+      });
+    } else {
+      init.headers = { "Content-Type": "application/json" };
+      init.body = JSON.stringify(payload || {});
+    }
+    const response = await fetch(url, init);
+    const text = await response.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = text;
+    }
+    if (!response.ok) {
+      throw new Error((data && data.message) || `HTTP ${response.status}`);
+    }
+    if (data && data.status === "error") {
+      throw new Error(data.message || "请求失败");
+    }
+    return data && data.data !== undefined ? data.data : data;
+  };
+  return {
+    ready: async () => {},
+    getContext: () => ({}),
+    onContext: () => () => {},
+    t: (_key, fallback) => fallback,
+    apiGet: (endpoint, params) => call("GET", endpoint, params),
+    apiPost: (endpoint, body) => call("POST", endpoint, body),
+  };
+})();
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
